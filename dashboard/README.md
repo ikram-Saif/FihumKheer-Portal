@@ -1,12 +1,77 @@
-# React + Vite
+# 🖥️ Fihum Kheer - Management Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![React Version](https://img.shields.io/badge/React-v19.0-61DAFB.svg)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Build-Vite-646CFF.svg)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Styling-Tailwind-38B2AC.svg)](https://tailwindcss.com/)
 
-Currently, two official plugins are available:
+The **Fihum Kheer Dashboard** is a modern, high-performance administrative interface for managing the charity portal. It allows administrators to effortlessly manage projects, volunteers, and content through a sleek, responsive UI.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Dashboard Overview:** Real-time summary of projects and activities.
+- **Project Control:** Full CRUD operations for charity initiatives.
+- **Volunteer Portal:** Review and manage volunteer submissions.
+- **Rich Text Editing:** Professional content creation using Tiptap and Quill.
+- **Responsive Design:** Optimized for desktop and mobile management.
+- **Modern UI Components:** Interactive elements powered by Flowbite and Mantine.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework:** [React 19](https://react.js.org/)
+- **Build Tool:** [Vite](https://vitejs.dev/)
+- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) & [Flowbite React](https://flowbite-react.com/)
+- **State Management:** [Zustand](https://zustand-demo.pmnd.rs/)
+- **Form Management:** [Formik](https://formik.org/) & [Yup](https://github.com/jquense/yup)
+- **UI Components:** [Mantine UI](https://mantine.dev/), [React-Icons](https://react-icons.github.io/react-icons/)
+- **Utilities:** Axios, SweetAlert2, Swiper
+
+---
+
+## 🚀 Getting Started
+
+### 1. Installation
+Install the project dependencies using npm:
+```bash
+npm install
+```
+
+### 2. Environment Variables
+Create a `.env` file and set your Backend API URL:
+```env
+VITE_API_URL=http://localhost:1337
+```
+
+### 3. Running the Project
+```bash
+# Start the development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+---
+
+## 📁 Project Structure
+
+- `src/components/`: Reusable UI components (Forms, Tables, Layouts).
+- `src/pages/`: Main application views (Dashboard, Projects, Login).
+- `src/services/`: API integration and data fetching logic.
+- `src/schemas/`: Validation schemas (Yup/Zod).
+- `src/store/`: Zustand state management stores.
+
+---
+
+## 📄 License
+
+This project is private and intended for the Fihum Kheer platform.
+
+---
+
+<p align="center">
+  Developed with ❤️ for the community.
+</p>
