@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@plugin "flowbite-react/plugin/tailwindcss";
+@source "../.flowbite-react/class-list.json";
+
+:root {
+  --primary-color: #0D7F7A;
+  /* blue-600 */
+  --secondary-color: #2B2B2B;
+  /* purple-600 */
+  --card-bg: #1f2937;
+  /* gray-800 */
+}
