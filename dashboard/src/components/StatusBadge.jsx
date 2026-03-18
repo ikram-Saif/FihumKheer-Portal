@@ -1,23 +1,23 @@
 import { Badge } from "flowbite-react";
 
 export default function StatusBadge({ status }) {
-  // Map status to Flowbite colors
-   const statusColors = {
-      Pending: "warning",
-      InProgress: "success",
-      Completed: "purple"
-    };
+  // Normalize status: trim spaces and handle case
+  const normalizedStatus = status?.trim().toLowerCase() || "";
 
-  // fallback color if status not found
-    const badgeColor = statusColors[status];
+  const statusMap = {
+    pending: { label: "Pending", color: "warning" },
+    inprogress: { label: "In Progress", color: "success" },
+    completed: { label: "Completed", color: "purple" },
+  };
 
+  const config = statusMap[normalizedStatus] || { label: status, color: "gray" };
 
   return (
     <Badge
-      className="w-fit rounded-full px-2 py-1 font-medium"
-      color={badgeColor}
+      className="w-fit rounded-full px-3 py-1 font-bold text-xs uppercase tracking-wider shadow-sm"
+      color={config.color}
     >
-      {status}
+      {config.label}
     </Badge>
   );
 }

@@ -34,7 +34,7 @@ function Projects() {
   const fetchProjects = async (pageNumber) => {
     try {
       console.log(pageNumber, "from project")
-      const response = await axios.get(`http://localhost:1337/api/projects?populate=*&pagination[page]=${pageNumber}&pagination[pageSize]=2`,
+      const response = await axios.get(`http://localhost:1337/api/projects?populate[0]=volunteers.image&populate[1]=project_domain&populate[2]=media&pagination[page]=${pageNumber}&pagination[pageSize]=2`,
 
         {
           headers: {
@@ -42,6 +42,7 @@ function Projects() {
           }
         })
       setProjects(response.data.data)
+      console.log(response.data.data)
       setMeta(response.data.meta)
       setPage(response.data.meta.pagination.page); // update current page
 
@@ -103,7 +104,7 @@ function Projects() {
                   </TableCell>
                   <TableCell className="py-2 text-red-600">{data.progress}%</TableCell>
                   <TableCell className="py-2">{data?.type}</TableCell>
-                  <TableCell className="py-2">{data.domain?.domain_name}</TableCell>
+                  <TableCell className="py-2">{data.project_domain?.name}</TableCell>
 
                   <TableCell className="py-2">{
 

@@ -17,7 +17,9 @@ export const editItem = async (id, data, resource, token, onSuccess) => {
         await apiService(resource).update(id, data, {}, token);
         return true;
       } catch (error) {
-        Swal.showValidationMessage(`Request failed: ${error.message || error}`);
+        console.error("DEBUG: Edit error detail:", error.response?.data || error);
+        const serverError = error.response?.data?.error?.message || error.message || error;
+        Swal.showValidationMessage(`Request failed: ${serverError}`);
       }
     },
     allowOutsideClick: () => !Swal.isLoading(),

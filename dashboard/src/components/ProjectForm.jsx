@@ -12,20 +12,21 @@ import { useNavigate } from 'react-router-dom';
 export default function ProjectForm({ project, action }) {
 
   console.log("Rendering ProjectForm with project:", project); // Debugging log to see what data is being passed to ProjectForm
-  const { volunteers, fetchAllVolunteers } = useVolunteersStore()
-  const { domains } = useDomainStore();
-  // console.log("Domains in ProjectForm:", domains); // Debugging log for domains
+  const { volunteers, fetchAllVolunteers } = useVolunteersStore();
+  const { domains, fetchAllDomains } = useDomainStore();
   const [files, setFiles] = useState([]);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (volunteers.length === 0) fetchAllVolunteers();
+    if (domains.length === 0) fetchAllDomains();
+  }, []);
 
   const projectVol = project?.volunteers?.map((vol) => String(vol.id)) || []
-
-  // Debugging log to see what data ProjectForm is actually receiving
-  useEffect(() => {
-    console.log("ProjectForm received project:", project);
-    console.log("ProjectForm description:", project?.description);
-  }, [project]);
+  
+  if (volunteers.length === 0) {
+      console.log("DEBUG: Volunteers list empty, attempting to fetch...");
+  }
 
 
   const handleCancel = () => {
@@ -38,7 +39,9 @@ export default function ProjectForm({ project, action }) {
 
     // Find Domain ID from the Name string (because the Select uses names)
     if (values.domain && domains.length > 0) {
-      const selectedDomain = domains.find(d => d.domain_name === values.domain);
+      const selectedDomain = domains.find(d => 
+        d.domain_name === values.domain || d.name === values.domain
+      );
       if (selectedDomain) {
         values.domain = selectedDomain.id;
       }
@@ -114,7 +117,7 @@ export default function ProjectForm({ project, action }) {
                 className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
               >
                 {domains.map((d, index) => (
-                  <option key={index}>{d.domain_name}</option>
+                  <option key={index}>{d.domain_name || d.name}</option>
                 ))}
 
               </Field >
@@ -194,20 +197,30 @@ export default function ProjectForm({ project, action }) {
                 className="w-fit rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-900 transition hover:bg-white"
               >
                 <div className="p-2">
-                  {volunteers.map((vol, index) => (
-                    <label
-                      key={index}
-                      className="flex items-center gap-2 px-2 py-1 hover:bg-gray-100 rounded cursor-pointer"
-                    >
-                      <Field
-                        type="checkbox"
-                        name="volunteers"
-                        value={String(vol.id)}
-                        className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                      />
-                      {vol.name}
-                    </label>
-                  ))}
+                  {volunteers.map((vol, index) => {
+                    const imageUrl = vol.image?.[0]?.url
+                      ? `http://localhost:1337${vol.image[0].url}`
+                      : "/placeholder.png";
+                    return (
+                      <label
+                        key={index}
+                        className="flex items-center gap-3 px-3 py-2 hover:bg-gray-50 rounded-xl cursor-pointer transition-colors"
+                      >
+                        <Field
+                          type="checkbox"
+                          name="volunteers"
+                          value={String(vol.id)}
+                          className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                        />
+                        <img
+                          src={imageUrl}
+                          alt={vol.name}
+                          className="w-8 h-8 rounded-full border object-cover shadow-sm"
+                        />
+                        <span className="text-sm font-medium text-gray-700">{vol.name}</span>
+                      </label>
+                    );
+                  })}
                 </div>
               </Dropdown>
             </div>

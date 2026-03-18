@@ -16,10 +16,9 @@ export default function EditProject() {
   const { token } = useAuthStore();
 
   const params = {
-    // "populate[domain][fields][0]": "domain_name",
-    // "populate[volunteers][populate]": "image",
-    // "populate": "media",
-    populate: "*"
+    "populate[0]": "volunteers.image",
+    "populate[1]": "project_domain",
+    "populate[2]": "media"
   };
 
   const fetchProject = async () => {

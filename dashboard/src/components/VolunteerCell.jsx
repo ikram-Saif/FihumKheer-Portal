@@ -1,4 +1,4 @@
-import { Dropdown  , DropdownItem} from "flowbite-react";
+import { Dropdown, DropdownItem } from "flowbite-react";
 
 export default function VolunteerCell({ volunteers }) {
   return (
@@ -8,8 +8,8 @@ export default function VolunteerCell({ volunteers }) {
       renderTrigger={() => (
         <div className="flex -space-x-3 cursor-pointer">
           {volunteers?.slice(0, 2).map((vol, index) => {
-            const imageUrl = vol.image?.url
-              ? `http://localhost:1337${vol.image.url}`
+            const imageUrl = vol.image?.[0]?.url
+              ? `http://localhost:1337${vol.image[0].url}`
               : "/placeholder.png";
             return (
               <img
@@ -30,8 +30,8 @@ export default function VolunteerCell({ volunteers }) {
       )}
     >
       {volunteers?.map((vol, index) => {
-        const imageUrl = vol.image?.url
-          ? `http://localhost:1337${vol.image.url}`
+        const imageUrl = vol.image?.[0]?.url
+          ? `http://localhost:1337${vol.image[0].url}`
           : "/placeholder.png";
         return (
           <DropdownItem key={index} className="flex items-center gap-2">

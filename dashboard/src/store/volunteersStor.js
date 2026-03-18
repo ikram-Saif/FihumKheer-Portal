@@ -5,27 +5,34 @@ import { volunteerService } from "../services/resources";
 
 
 const params = {
-    "populate" : "*"
+    "populate": "*"
 }
 
-const token = localStorage.getItem("Token")
-
-
 export const useVolunteersStore = create((set) => ({
-
-
-    volunteers:[],
-    fetchAllVolunteers: async()=>{
-
+    volunteers: [],
+    fetchAllVolunteers: async () => {
+        const token = localStorage.getItem("Token");
+        console.log("DEBUG: fetchAllVolunteers initiated. Token exists:", !!token);
+        
+        const fetchParams = {
+            "populate": "*"
+        };
+        
         try {
-            const response = await volunteerService.getAll(params , token);
-            set({ volunteers: response.data });
-        } catch (error) {
+            const response = await volunteerService.getAll(fetchParams, token);
+            console.log("DEBUG: fetchAllVolunteers success. Response data:", response);
             
+            // Strapi usually returns { data: [...] }
+            const data = response.data || response;
+            set({ volunteers: Array.isArray(data) ? data : [] });
+        } catch (error) {
+            console.error("DEBUG: Failed to fetch volunteers.");
+            if (error.response) {
+                console.error("DEBUG: Server responded with status:", error.response.status);
+                console.error("DEBUG: Server response body:", error.response.data);
+            } else {
+                console.error("DEBUG: Error message:", error.message);
+            }
         }
-
     }
-
-    //fetchall vol
-
 }));

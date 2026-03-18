@@ -20,14 +20,27 @@ export default function Slider() {
   }
 
   return (
-    <div className="">
+    <div className="w-full h-full">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
-        navigation
-        pagination={{ clickable: true }}
-        autoplay={{ delay: 4000, disableOnInteraction: false }}
-        loop={true}
-        className="rounded-2xl shadow-lg"
+        navigation={true}
+        pagination={{ 
+          clickable: true,
+          dynamicBullets: true 
+        }}
+        autoplay={{ 
+          delay: 5000, 
+          disableOnInteraction: false 
+        }}
+        loop={selectedProject.media.length > 1}
+        className="w-full h-full rounded-2xl overflow-hidden swiper-premium"
+        style={{
+          "--swiper-navigation-size": "20px",
+          "--swiper-theme-color": "#2563eb",
+          "--swiper-navigation-color": "#ffffff",
+          "--swiper-pagination-bullet-inactive-color": "#cbd5e1",
+          "--swiper-pagination-bullet-inactive-opacity": "0.5",
+        }}
       >
         {selectedProject.media.map((img, index) => {
           const url = img?.url
@@ -36,11 +49,11 @@ export default function Slider() {
 
           return (
             <SwiperSlide key={index}>
-              <div className="flex items-center justify-center w-full h-full bg-gray-50">
+              <div className="flex items-center justify-center w-full h-full bg-gray-100 dark:bg-gray-900">
                 <img
                   src={url}
-                  alt={`slide-${index}`}
-                  className="object-contain w-full h-full rounded-2xl"
+                  alt={selectedProject.name || `slide-${index}`}
+                  className="object-cover w-full h-full"
                 />
               </div>
             </SwiperSlide>

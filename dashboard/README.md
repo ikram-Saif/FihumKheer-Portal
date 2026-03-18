@@ -10,12 +10,15 @@ The **Fihum Kheer Dashboard** is a modern, high-performance administrative inter
 
 ## ✨ Features
 
-- **Dashboard Overview:** Real-time summary of projects and activities.
-- **Project Control:** Full CRUD operations for charity initiatives.
-- **Volunteer Portal:** Review and manage volunteer submissions.
+- **Dashboard Overview:** Real-time visual summary of charity performance.
+- **Project Lifecycle:** Full creation-to-completion management with goal tracking.
+- **Advanced Pagination:** Efficient data loading for large project lists.
+- **Multi-Media Handling:** Seamless upload and display of project galleries.
 - **Rich Text Editing:** Professional content creation using Tiptap and Quill.
-- **Responsive Design:** Optimized for desktop and mobile management.
-- **Modern UI Components:** Interactive elements powered by Flowbite and Mantine.
+- **Smart Team Assignment:** Visual volunteer selection with avatar integration.
+- **Premium Visualization:** Interactive sliders and progress indicators for project transparency.
+- **Data Safety:** Multi-layer validation using Formik and Zod/Schema patterns.
+- **State Efficiency:** Lightweight, reactive state management via Zustand.
 
 ---
 

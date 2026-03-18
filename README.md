@@ -9,14 +9,23 @@
 
 ---
 
-## 🛠️ Project Structure
+## 📂 Project Architecture
 
-The project is divided into two main components:
+```text
+FihumKheer-Portal/
+├── bakend/             # Strapi 5 Headless CMS (API)
+│   ├── src/api/        # Data models & Business logic
+│   └── public/uploads/ # Hosted media assets
+└── dashboard/          # React 19 Admin Portal (Frontend)
+    ├── src/components/ # Reusable UI components
+    ├── src/store/      # Zustand state management
+    └── src/pages/      # Application views
+```
 
-| Component | Description | Technologies |
+| Component | Role | Primary Stack |
 | :--- | :--- | :--- |
-| **Backend** | Headless CMS and API provider. | Strapi, Node.js, SQLite |
-| **Dashboard** | Management interface for administrators. | React, Vite, Tailwind CSS, Flowbite |
+| **Backend** | Data Source & Auth | Strapi 5, Node.js, SQLite |
+| **Dashboard** | Admin Interface | React 19, Vite, Tailwind CSS v4 |
 
 ---
 

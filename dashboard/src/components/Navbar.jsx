@@ -13,10 +13,16 @@ import {
 } from "flowbite-react";
 import { HiMenu , HiX ,HiBell, HiSun, HiMoon} from "react-icons/hi";
 import {useState} from "react"
+import { useAuthStore } from "../store/authStor";
 
 
 function Nav({ setIsSidebarOpen, isSidebarOpen }) {
    const [darkMode, setDarkMode] = useState(false);
+      const logout = useAuthStore((state)=> state.logout);
+
+    const handlelogout = () => {
+      logout();
+    }
   return (
  
        <Navbar fluid rounded className="bg-white border-b border-gray-100 p-4">
@@ -67,7 +73,7 @@ function Nav({ setIsSidebarOpen, isSidebarOpen }) {
           <DropdownItem>Settings</DropdownItem>
           <DropdownItem>Earnings</DropdownItem>
           <DropdownDivider />
-          <DropdownItem>Sign out</DropdownItem>
+          <DropdownItem onClick={handlelogout}>Sign out</DropdownItem>
         </Dropdown>
   
         <NavbarToggle />

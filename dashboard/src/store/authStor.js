@@ -7,9 +7,10 @@ export const useAuthStore = create((set)=>({
     localStorage.setItem("Token", jwt);
     set({ token: jwt });
   },
-  clearToken: () => {
+    logout: () => {
     localStorage.removeItem("Token");
-    set({ token: null });
+    localStorage.removeItem("role");
+    set({ token: null, userRole: null });
   },
   userRole: localStorage.getItem("role") || null,
   setRole: (role)=>{

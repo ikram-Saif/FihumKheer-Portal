@@ -23,20 +23,21 @@ export const mapToStrapi = (values) => {
   return {
     name: cleanData.name,
     type: cleanData.type,
-    project_status: cleanData.status,
+    // Handle the specific backend typo for "pending "
+    project_status: cleanData.status === "pending" ? "pending " : cleanData.status,
     project_goals: cleanData.goals,
     project_raised: cleanData.raised,
     progress: cleanData.progress,
     quantity: cleanData.quantity,
     description: cleanData.description,
-    media: cleanData.existingMediaIds, // Existing IDs [8, 7...]
+    media: cleanData.existingMediaIds || [],
 
     // Domain comes in as a string name from the <select>, we need to send the ID if possible, 
     // BUT since we don't have access to the store here easily, and your form maps names, 
     // you might need to handle this in ProjectForm.jsx before calling mapToStrapi.
     // For now, I'll assume we pass it through, but check your Form submission logic!
-    domain: values.domain,
-    volunteers: values.volunteers, // Array of IDs
+    project_domain: values.domain ? Number(values.domain) : null,
+    volunteers: values.volunteers ? values.volunteers.map(Number) : [], // Array of IDs as numbers
   };
 };
 
@@ -45,22 +46,20 @@ export const mapToStrapi = (values) => {
  * Use this to fill your 'initialValues'
  */
 export const mapFromStrapi = (strapiData) => {
-  // Note: Your GET response shows data directly inside "data", 
-  // not "data.attributes" (this happens in Strapi v5)
   const item = strapiData;
 
   return {
     name: item?.name || "",
     type: item?.type || "",
-    status: item?.project_status || "pending",
+    status: item?.project_status?.trim() || "pending",
     goals: item?.project_goals || 0,
     raised: item?.project_raised || 0,
     progress: item?.progress || 0,
     description: item?.description || [],
     existingMediaIds: item?.media ? item.media.map((m) => m.id) : [],
     newMedia: [],
-    // We pass the full media objects only for FilePond to show previews
     mediaObjects: item?.media || [],
-    domain: item?.domain?.domain_name || "",
+    domain: item?.project_domain?.domain_name || item?.project_domain?.name || "",
+    volunteers: item?.volunteers ? item.volunteers.map((v) => String(v.id)) : [],
   };
 };
