@@ -1,109 +1,85 @@
-# 🌙 Fihum Kheer Charity Platform
+# 🖥️ Fihum Kheer - Management Dashboard
 
-[![Project Status: Active](https://img.shields.io/badge/Project%20Status-Active-brightgreen.svg)](https://github.com/ikram-Saif/FihumKheer-Portal)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Made with Strapi](https://img.shields.io/badge/Made%20with-Strapi-blue.svg)](https://strapi.io/)
-[![Made with React](https://img.shields.io/badge/Made%20with-React-61DAFB.svg)](https://reactjs.org/)
+[![React Version](https://img.shields.io/badge/React-v19.0-61DAFB.svg?style=for-the-badge&logo=react)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Build-Vite-646CFF.svg?style=for-the-badge&logo=vite)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Styling-Tailwind_CSS-38B2AC.svg?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+[![Zustand](https://img.shields.io/badge/State-Zustand-orange.svg?style=for-the-badge)](https://zustand-demo.pmnd.rs/)
 
-**Fihum Kheer** is a comprehensive digital solution for charity management, designed to bridge the gap between donors and those in need. This repository contains both the robust administration dashboard (Frontend) and the powerful content API (Backend).
+The **Fihum Kheer Dashboard** is a high-performance, ultra-premium administrative interface for managing the charity portal. It leverages modern SaaS design principles (glassmorphism, interactive analytics) to allow administrators to effortlessly manage projects, volunteers, donations, and content through a sleek, highly responsive UI.
 
 ---
 
-## 📂 Project Architecture
+## ✨ Features & Enhancements
+
+- **Premium SaaS Analytics Dashboard:** Fully refactored UI featuring deep glowing mesh gradients, backdrop-blur 3xl glassmorphism cards, and interactive hover-lift micro-animations.
+- **Real-Time Visualizations:** Custom-built metric bar charts for **Donation Traffic** and **Visitor Analytics** with interactive floating tooltips and smooth transitions.
+- **Global Network Tracking:** A dedicated 'Active Partners' widget highlighting ongoing collaborations globally, utilizing rich typography and badge indicators.
+- **Project Lifecycle Management:** Full creation-to-completion management with automated goal tracking.
+- **State Efficiency:** Lightweight, hyper-reactive state management via Zustand (`projectsStore`, `volunteersStore`).
+- **Data Safety:** Multi-layer validation leveraging **Zod** (stable `^3.23.8`) and schema design patterns to prevent client-side data corruption.
+- **Rich User Experience:**
+  - Stunning animated sidebar with custom Flowbite themes.
+  - Granular activity timelines equipped with customized status node LEDs.
+  - Multi-media gallery handling and rich text editing integrations (Quill/Tiptap).
+
+---
+
+## 🛠️ Tech Stack & Architecture
+
+- **Core:** [React 19](https://react.dev/)
+- **Build & Dependency:** [Vite](https://vitejs.dev/)
+- **Styling Architecture:** [Tailwind CSS v4](https://tailwindcss.com/) coupled with a highly customized [Flowbite React](https://flowbite-react.com/) theme.
+- **State Management:** [Zustand](https://zustand-demo.pmnd.rs/) for performant, boilerplate-free global state.
+- **Validation:** **Zod** & **Yup** configuration for stringent form control.
+- **Iconography:** [React Icons (Lu / Hi)](https://react-icons.github.io/react-icons/) optimized for visual balance.
+
+---
+
+## 🚀 Getting Started
+
+### 1. Installation
+Install the project dependencies using npm:
+```bash
+npm install
+```
+*(Note: Ensure you are on a compatible version of Node.js. If you encounter dependency caching issues, it is recommended to run `npm cache clean --force` or clear out `node_modules` before fresh installations.)*
+
+### 2. Environment Variables
+Create a `.env` file at the root of the project and define your backend API mapping:
+```env
+VITE_API_URL=http://localhost:1337
+```
+
+### 3. Running the Project
+```bash
+# Start the Vite development server with Hot Module Replacement (HMR)
+npm run dev
+
+# Build the optimized bundle for production deployment
+npm run build
+```
+
+---
+
+## 📁 Project Structure
 
 ```text
-FihumKheer-Portal/
-├── bakend/             # Strapi 5 Headless CMS (API)
-│   ├── src/api/        # Data models & Business logic
-│   └── public/uploads/ # Hosted media assets
-└── dashboard/          # React 19 Admin Portal (Frontend)
-    ├── src/components/ # Reusable UI components
-    ├── src/store/      # Zustand state management
-    └── src/pages/      # Application views
-```
-
-| Component | Role | Primary Stack |
-| :--- | :--- | :--- |
-| **Backend** | Data Source & Auth | Strapi 5, Node.js, SQLite |
-| **Dashboard** | Admin Interface | React 19, Vite, Tailwind CSS v4 |
-
----
-
-## 🖥️ Frontend (Dashboard)
-
-The dashboard provides a user-friendly interface for managing all aspects of the charity initiative.
-
-### Core Features
-- **Project Management:** Create, edit, and track charity projects.
-- **Volunteer Coordination:** Manage volunteer applications and assignments.
-- **Donation Tracking:** Real-time monitoring of contributions.
-- **Resource Management:** Handle sectors, events, and gallery items.
-- **User Authentication:** Secure login for authorized administrators.
-
-### Tech Stack
-- **Framework:** React 19 (Vite)
-- **Styling:** Tailwind CSS & Flowbite
-- **Form Handling:** Formik & Yup
-- **UI Components:** Mantine, React-Icons, SweetAlert2
-
-👉 **[Go to Dashboard README](./dashboard/README.md)** for setup and technical details.
-
----
-
-## ⚙️ Backend (API)
-
-A powerful headless CMS built with Strapi to manage data models and provide high-performance API endpoints.
-
-### Core Architecture
-- **Collection Types:** Projects, Volunteers, Articles, Categories, Sectors, and more.
-- **Permissions:** Granular access control using the Strapi Users-Permissions plugin.
-- **Media Library:** Centralized asset management for images and documents.
-
-### Tech Stack
-- **CMS:** Strapi 5
-- **Language:** TypeScript
-- **Database:** SQLite (Better-SQLite3)
-
-👉 **[Go to Backend README](./bakend/README.md)** for API documentation and deployment steps.
-
----
-
-## 🚀 Quick Start
-
-To get the full system up and running locally, follow these steps:
-
-### 1. Clone the repository
-```bash
-git clone https://github.com/ikram-Saif/FihumKheer-Portal.git
-cd FihumKheer-Portal
-```
-
-### 2. Setup the Backend
-```bash
-cd bakend
-npm install
-npm run develop
-```
-
-### 3. Setup the Dashboard
-```bash
-cd dashboard
-npm install
-npm run dev
+src/
+├── components/   # Reusable UI elements (Sidebar, Navbar, custom Buttons)
+├── pages/        # Main application views (Dashboard, Projects, Login)
+├── services/     # API integration and abstracted data fetching logic
+├── schemas/      # Validation schemas (Yup/Zod configurations)
+└── store/        # Zustand state management stores (projectsStore.js, etc.)
 ```
 
 ---
 
-## 🤝 Contributing
+## 🤝 Contribution & License
 
-We welcome contributions! Please feel free to submit a Pull Request or open an issue.
-
-## 📄 License
-
-This project is licensed under the MIT License - see the `license.txt` file for details.
+This project is a private repository intended for the **Fihum Kheer** initiative platform. Access and push rights are restricted to authorized contributors. 
 
 ---
 
 <p align="center">
-  Developed with ❤️ for the community.
+  <em>Developed with ❤️ for the community.</em>
 </p>
