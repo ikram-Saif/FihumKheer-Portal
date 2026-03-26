@@ -8,6 +8,10 @@ export default function StatusBadge({ status }) {
     pending: { label: "Pending", color: "warning" },
     inprogress: { label: "In Progress", color: "success" },
     completed: { label: "Completed", color: "purple" },
+    offline: { label: "Offline", color: "dark" },
+    onsite: { label: "Onsite", color: "indigo" },
+    online: { label: "Online", color: "success" },
+    both: { label: "Hybrid", color: "purple" },
   };
 
   const config = statusMap[normalizedStatus] || { label: status, color: "gray" };

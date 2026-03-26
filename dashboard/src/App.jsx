@@ -16,11 +16,11 @@ import Login from "./pages/Login";
 import ProtectedRoute from "./route/ProtectedRoute";
 import GuestRoute from "./route/GuestRoute";
 import RoleRoute from  "./route/RoleRoute"
-import EditProject from "./pages/EditProject";
+import EditResource from "./pages/EditResource";
 import { useVolunteersStore } from "./store/volunteersStor";
 import { useEffect } from "react";
 import { useDomainStore } from "./store/domainStore";
-import AddProject from "./pages/AddProject";
+import AddResource from "./pages/AddResource";
 
 
 function App() {
@@ -35,7 +35,14 @@ function App() {
             element:  <DashboardLayout />,
             children: [
           { index: true, element: <Dashboard /> },
-          { path: "volunteers", element:<Volunteers /> },
+          { 
+            path: "volunteers", 
+            children: [
+              { index: true, element: <Volunteers /> },
+              { path: "add", element: <AddResource resource="volunteers" /> }, 
+              { path: "edit/:id", element: <EditResource resource="volunteers" /> }, 
+            ]
+          },
           { path: "donation", element:  <Donation /> },
           { path: "events", element:<Event /> },
           { path: "users", element: (<RoleRoute roles={["admin"]}> <Users /></RoleRoute>) },
@@ -45,8 +52,8 @@ function App() {
           { path: "projects",  element: (<RoleRoute roles={allRoles}> <Projects /> </RoleRoute>),
             children:[
                     { index: true,element: <Projects/>}, 
-                    { path: "add",element: <AddProject/>},
-                    { path: "edit/:id",element: <EditProject/>}, 
+                    { path: "add",element: <AddResource resource="projects" />},
+                    { path: "edit/:id",element: <EditResource resource="projects" />}, 
                     { path: "recent", element: (<RoleRoute roles={["admin"]}><RecentProject /> </RoleRoute>) } ,
             ] 
           },

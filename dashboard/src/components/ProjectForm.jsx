@@ -23,9 +23,9 @@ export default function ProjectForm({ project, action }) {
   }, []);
 
   const projectVol = project?.volunteers?.map((vol) => String(vol.id)) || []
-  
+
   if (volunteers.length === 0) {
-      console.log("DEBUG: Volunteers list empty, attempting to fetch...");
+    console.log("DEBUG: Volunteers list empty, attempting to fetch...");
   }
 
 
@@ -39,7 +39,7 @@ export default function ProjectForm({ project, action }) {
 
     // Find Domain ID from the Name string (because the Select uses names)
     if (values.domain && domains.length > 0) {
-      const selectedDomain = domains.find(d => 
+      const selectedDomain = domains.find(d =>
         d.domain_name === values.domain || d.name === values.domain
       );
       if (selectedDomain) {
@@ -139,8 +139,8 @@ export default function ProjectForm({ project, action }) {
               </Field >
             </div>
 
-            {/* Goals + Raised Combined */}
-            <div className="md:col-span-1 grid grid-cols-2 gap-4">
+            {/* Financial Goals */}
+            <div className="grid grid-cols-2 gap-6">
               <div>
                 <Label className="block mb-2 text-sm font-medium text-gray-700">Project Goals</Label>
                 <Field
@@ -161,7 +161,7 @@ export default function ProjectForm({ project, action }) {
               </div>
             </div>
 
-            {/* Progress */}
+            {/* Progress and Urgent Needs */}
             <div>
               <Label className="block mb-2 text-sm font-medium text-gray-700">Project Progress (%)</Label>
               <Field
@@ -172,58 +172,74 @@ export default function ProjectForm({ project, action }) {
               />
             </div>
 
-            {/* Media */}
+            {/* Volunteers Selection */}
             <div>
-              <Label className="block mb-2 text-sm font-medium text-gray-700">Project Media</Label>
-
-              <UploadMedia
-                // We "inject" the helpers manually here
-                form={{ setFieldValue }}
-                mediaObjects={project?.media}
-              />
-
-            </div>
-
-            {/* Volunteers */}
-            <div>
-              <Label className="block mb-2 text-sm font-medium text-gray-700">Assign Volunteers</Label>
-              <Dropdown
-                label={
-                  projectVol.length > 0
-                    ? `Selected (${projectVol.length}) Volunteers`
-                    : "Choose volunteers"
-                }
-                dismissOnClick={false}
-                className="w-fit rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-900 transition hover:bg-white"
-              >
-                <div className="p-2">
-                  {volunteers.map((vol, index) => {
-                    const imageUrl = vol.image?.[0]?.url
-                      ? `http://localhost:1337${vol.image[0].url}`
-                      : "/placeholder.png";
-                    return (
-                      <label
-                        key={index}
-                        className="flex items-center gap-3 px-3 py-2 hover:bg-gray-50 rounded-xl cursor-pointer transition-colors"
-                      >
-                        <Field
-                          type="checkbox"
-                          name="volunteers"
-                          value={String(vol.id)}
-                          className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                        />
-                        <img
-                          src={imageUrl}
-                          alt={vol.name}
-                          className="w-8 h-8 rounded-full border object-cover shadow-sm"
-                        />
-                        <span className="text-sm font-medium text-gray-700">{vol.name}</span>
-                      </label>
-                    );
-                  })}
+              <div>
+                <Label className="block mb-2 text-sm font-medium text-gray-700">Assign Dedicated Team Members</Label>
+                <div className="p-4 bg-white dark:bg-gray-950/20 border border-gray-100 dark:border-gray-800 rounded-3xl">
+                  <Dropdown
+                    label={projectVol.length > 0 ? `Selected (${projectVol.length}) Volunteers` : "Choose volunteers"}
+                    dismissOnClick={false}
+                    className="w-full md:w-fit rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-900 transition hover:bg-gray-50"
+                  >
+                    <div className="p-2 max-h-60 overflow-y-auto w-64">
+                      {volunteers.map((vol, index) => {
+                        const imageUrl = vol.image?.[0]?.url ? `http://localhost:1337${vol.image[0].url}` : "/placeholder.png";
+                        return (
+                          <label key={index} className="flex items-center gap-3 px-3 py-2 hover:bg-gray-50 rounded-xl cursor-pointer transition-colors">
+                            <Field
+                              type="checkbox"
+                              name="volunteers"
+                              value={String(vol.id)}
+                              className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                            />
+                            <img src={imageUrl} alt={vol.name} className="w-8 h-8 rounded-full border object-cover shadow-sm" />
+                            <span className="text-sm font-medium text-gray-700">{vol.name}</span>
+                          </label>
+                        );
+                      })}
+                    </div>
+                  </Dropdown>
                 </div>
-              </Dropdown>
+              </div>
+
             </div>
+            <div>
+              <Label className="block mb-2 text-sm font-medium text-gray-700">Urgent Needs</Label>
+              <div className="flex flex-wrap gap-4 py-2">
+                {[
+                  { id: 'partners', label: 'Partners' },
+                  { id: 'donors', label: 'Donors' },
+                  { id: 'volunteers', label: 'Volunteers' }
+                ].map((option) => (
+                  <label key={option.id} className="flex items-center gap-2 cursor-pointer group">
+                    <Field
+                      type="checkbox"
+                      name="urgent_need"
+                      value={option.id}
+                      className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 shadow-sm"
+                    />
+                    <span className="text-sm font-medium text-gray-700 group-hover:text-blue-600 transition-colors">
+                      {option.label}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </div>
+            {/* Media - Full Width */}
+            <div className="space-y-4">
+              <div className="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-3xl border border-gray-100 dark:border-gray-800 transition-all hover:shadow-md group">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                  <div>
+                    <Label className="block text-lg font-bold text-gray-900 dark:text-gray-100 italic">Project Media Assets</Label>
+                    <p className="text-xs text-gray-500 font-medium tracking-tight">Showcase the visual story of your initiative.</p>
+                  </div>
+                </div>
+                <UploadMedia form={{ setFieldValue }} mediaObjects={project?.media} />
+              </div>
+            </div>
+
+
 
             {/* Description */}
             <div className="md:col-span-2">
@@ -250,7 +266,7 @@ export default function ProjectForm({ project, action }) {
             </div>
           </Form>
         )}
-      </Formik>
+      </Formik >
     </>
   )
 }

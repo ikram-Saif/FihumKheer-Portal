@@ -1,0 +1,28 @@
+
+> dashboard@0.0.0 build
+> vite build
+
+[36mvite v7.1.2 [32mbuilding for production...[36m[39m
+Generating .flowbite-react\class-list.json file...
+transforming...
+[32m✓[39m 1444 modules transformed.
+[31m✗[39m Build failed in 7.36s
+[31merror during build:
+[31msrc/pages/projects/Projects.jsx (16:9): "LuLayout" is not exported by "node_modules/react-icons/lu/index.mjs", imported by "src/pages/projects/Projects.jsx".[31m
+file: [36mD:/eraasoft/final project/dashboard/src/pages/projects/Projects.jsx:16:9[31m
+[33m
+14: import { Link } from "react-router-dom"
+15: import PageTopSection from "../../components/PageTopSection";
+16: import { LuLayout, LuClock, LuActivity, LuCircleCheck } from 'react-icons/lu';
+             ^
+[31m
+    at getRollupError (file:///D:/eraasoft/final%20project/dashboard/node_modules/rollup/dist/es/shared/parseAst.js:401:41)
+    at error (file:///D:/eraasoft/final%20project/dashboard/node_modules/rollup/dist/es/shared/parseAst.js:397:42)
+    at Module.error (file:///D:/eraasoft/final%20project/dashboard/node_modules/rollup/dist/es/shared/node-entry.js:16875:16)
+    at Module.traceVariable (file:///D:/eraasoft/final%20project/dashboard/node_modules/rollup/dist/es/shared/node-entry.js:17327:29)
+    at ModuleScope.findVariable (file:///D:/eraasoft/final%20project/dashboard/node_modules/rollup/dist/es/shared/node-entry.js:14997:39)
+    at FunctionScope.findVariable (file:///D:/eraasoft/final%20project/dashboard/node_modules/rollup/dist/es/shared/node-entry.js:5620:38)
+    at FunctionBodyScope.findVariable (file:///D:/eraasoft/final%20project/dashboard/node_modules/rollup/dist/es/shared/node-entry.js:5620:38)
+    at Identifier.bind (file:///D:/eraasoft/final%20project/dashboard/node_modules/rollup/dist/es/shared/node-entry.js:5394:40)
+    at Property.bind (file:///D:/eraasoft/final%20project/dashboard/node_modules/rollup/dist/es/shared/node-entry.js:2785:23)
+    at ObjectExpression.bind (file:///D:/eraasoft/final%20project/dashboard/node_modules/rollup/dist/es/shared/node-entry.js:2781:28)[39m
